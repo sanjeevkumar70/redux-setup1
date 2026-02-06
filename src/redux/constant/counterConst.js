@@ -1,0 +1,5 @@
+export const COUNTER_TYPE_INCR = "COUNTER_TYPE_INCR";
+export const COUNTER_TYPE_DECR = "COUNTER_TYPE_DECR";
+
+
+export const FETCH_DATA = "FETCH_DATA";
