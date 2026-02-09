@@ -3,6 +3,10 @@ import './App.css';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import { useSelector } from 'react-redux';
+import Navbar from './components/Navbar/Navbar';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
 
 function App() {
 
@@ -12,11 +16,18 @@ function App() {
 
   return (
     <>
-      <Counter />
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+      </Routes>
 
-      {temp?.products?.map((item) => <h1>{item.title}</h1>)}
 
-      <FetchData />
+      {/* <Counter /> */}
+
+      {/* {temp?.products?.map((item) => <h1>{item.title}</h1>)}
+
+      <FetchData /> */}
     </>
   );
 }
