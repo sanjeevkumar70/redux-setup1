@@ -7,10 +7,13 @@ import Navbar from './components/Navbar/Navbar';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import Login from './pages/Login';
+import { ProtectedaRoute } from './components/ProtectedaRoute';
 
 function App() {
 
   const temp = useSelector(state => state.productReducer.productData)
+  const token = localStorage.getItem('token')
 
   console.log(temp)
 
@@ -19,7 +22,14 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
+        <Route path='/login' element={<Login />} />
+
+
+        <Route path='/about' element={
+          <ProtectedaRoute>
+            <About />
+          </ProtectedaRoute>
+        } />
       </Routes>
 
 

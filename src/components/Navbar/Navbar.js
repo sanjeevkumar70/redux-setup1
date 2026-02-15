@@ -8,6 +8,8 @@ const Navbar = () => {
   const [menuStatus, setMenuStatus] = useState(false)
   const [subMenu, setSubMenu] = useState(false)
 
+  const token = localStorage.getItem("token")
+
   return (
     <nav className='header-scetion'>
       <div className="header-container">
@@ -26,7 +28,7 @@ const Navbar = () => {
           <div className={`nav-links ${menuStatus ? "active" : ""}`}>
 
             <NavLink to='/' className='nav-item'>Home</NavLink>
-            <NavLink to='/' className='nav-item'>About</NavLink>
+            <NavLink to='/about' className='nav-item'>About</NavLink>
 
             {/* 🔽 Submenu */}
             <div className="nav-item dropdown">
@@ -41,8 +43,14 @@ const Navbar = () => {
               </div>
             </div>
 
-            <NavLink to='/' className='nav-item'>Blog</NavLink>
-            <NavLink to='/' className='nav-item'>Contact</NavLink>
+
+            {token ?
+              <NavLink to='/login' className='nav-item' onClick={() => {
+                localStorage.removeItem('token')
+              }}>Logout</NavLink>
+              :
+              <NavLink to='/login' className='nav-item'>Login</NavLink>
+            }
 
           </div>
         </div>
