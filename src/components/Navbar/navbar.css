@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     background: #000;
-    padding: 5px 40px;
+    padding: 5px 100px;
 }
 
 .header-scetion .header-container .navbar .navbar-top img {
@@ -25,11 +25,25 @@
     text-decoration: none;
     font-size: 18px;
     transition: transform 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+.header-scetion .header-container .navbar .nav-links .nav-item.cart-counter span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: 12px;
+    right: 12px;
 }
 
 /* Hover effect (NO layout break) */
 .header-scetion .header-container .navbar .nav-links .nav-item:hover {
-    transform: scale(1.1);
     color: #40ff00;
 }
 
@@ -38,8 +52,8 @@
     position: relative;
 }
 
-/* Submenu */post
-.header-scetion .submenu {
+/* Submenu */
+post .header-scetion .submenu {
     position: absolute;
     top: 100%;
     left: 0;

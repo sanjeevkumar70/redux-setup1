@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { cartAction } from '../redux/action/cartData'
 
 const Home = () => {
 
     const [data, setData] = useState([])
+    const dispatch = useDispatch()
+
+
+    const temp_data = useSelector((state) => state.cartReducer.cart_product);
+    console.log(temp_data, 'this is home page')
 
     useEffect(() => {
 
@@ -12,7 +19,11 @@ const Home = () => {
 
     }, [])
 
-    console.log(data, 'this is cuteee data')
+
+    const handleCart = (p_data) => {
+        dispatch(cartAction(p_data))
+    }
+
 
     return (
         <div style={{
@@ -30,8 +41,8 @@ const Home = () => {
                     textAlign: "center",
                     backgroundColor: "#fff"
                 }}>
-                    <img 
-                        src={item.thumbnail} 
+                    <img
+                        src={item.thumbnail}
                         alt={item.title}
                         style={{
                             width: "100%",
@@ -65,7 +76,9 @@ const Home = () => {
                         backgroundColor: "#000",
                         color: "#fff",
                         cursor: "pointer"
-                    }}>
+                    }}
+                        onClick={() => handleCart(item)}
+                    >
                         Add to Cart
                     </button>
 

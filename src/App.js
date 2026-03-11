@@ -12,6 +12,7 @@ import { ProtectedaRoute } from './components/ProtectedaRoute';
 import { ApiCall } from './components/FetchApi/ApiCall';
 import ApiCall2 from './components/FetchApi/ApiCall2';
 import ApiCall3 from './components/FetchApi/ApiCall3';
+import Cart from './components/Cart';
 
 function App() {
 
@@ -24,9 +25,10 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        {/* <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} /> */}
-        <Route path='/' element={<ApiCall3 />} />
+        <Route path='/' element={<Home />} />
+        {/* <Route path='/login' element={<Login />} /> */}
+        {/* <Route path='/' element={<ApiCall3 />} /> */}
+        <Route path='/cart' element={<Cart />} />
 
         <Route path='/about' element={
           <ProtectedaRoute>

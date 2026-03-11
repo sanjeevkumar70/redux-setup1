@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars, faXmark, faChevronDown } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faXmark, faChevronDown, faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const [menuStatus, setMenuStatus] = useState(false)
   const [subMenu, setSubMenu] = useState(false)
 
   const token = localStorage.getItem("token")
+  const temp_data = useSelector((state) => state.cartReducer.cart_product);
+
 
   return (
     <nav className='header-scetion'>
@@ -36,13 +39,12 @@ const Navbar = () => {
                 Product <FontAwesomeIcon icon={faChevronDown} />
               </span>
 
-              <div className={`submenu ${subMenu ? "open" : ""}`}>
-                <NavLink to='/product/upi'>UPI</NavLink>
-                <NavLink to='/product/wallet'>Wallet</NavLink>
-                <NavLink to='/product/cards'>Cards</NavLink>
-              </div>
             </div>
 
+            <NavLink to='/cart' className='nav-item cart-counter'>
+              <FontAwesomeIcon icon={faCartShopping} size={'xl'} />
+              <span>{temp_data.length}</span>
+            </NavLink>
 
             {token ?
               <NavLink to='/login' className='nav-item' onClick={() => {
