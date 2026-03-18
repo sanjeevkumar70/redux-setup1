@@ -1,38 +1,24 @@
 import React from 'react'
-import './cart.css'
+import './wish.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { cartRemoveAction, quantityUpdateAction } from '../redux/action/cartData';
+import { useNavigate } from 'react-router-dom';
 
-const Cart = () => {
+const Wish = () => {
     const dispatch = useDispatch();
-    const temp_data = useSelector((state) => state.cartReducer.cart_product);
-    // console.log(temp_data, "prachi jhcgjnfmh")
+    const navigate = useNavigate();
 
-    const handleRemove = (id) => {
-        dispatch(cartRemoveAction(id))
+    const wish_data = useSelector((state) => state.wishcartReducer.wish_data);
 
-    }
-    const quantityUpdate = (id, quantity) => {
-        dispatch(quantityUpdateAction(id, quantity))
-    }
 
-    let price = 0;
-    temp_data?.map((item) => {
-        price = (price + (item?.price - 2) * item?.quantity)
-    })
 
 
     return (
-        <div>
-
-
+        <div> 
             <div class="container">
-
                 <div class="cart-items">
-                    <h2>My Cart (1 item)</h2>
-
+                    <h2>My Wish Cart </h2>
                     {
-                        temp_data?.map((item) =>
+                        wish_data?.map((item) =>
                             <div class="cart-card" key={item?.id}>
                                 <img src={item?.thumbnail} alt="product" />
 
@@ -47,7 +33,7 @@ const Cart = () => {
                                         <span class="discount">14% off</span>
                                     </div>
 
-                                    <div class="actions">
+                                    {/* <div class="actions">
                                         <button>Save for later</button>
                                         <button onClick={() => handleRemove(item?.id)}>Remove</button>
                                         <div className='quantity'>
@@ -55,7 +41,7 @@ const Cart = () => {
                                             <span>{item.quantity}</span>
                                             <button onClick={() => quantityUpdate(item?.id, "incer")}>+</button>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         )
@@ -67,7 +53,7 @@ const Cart = () => {
 
                     <div class="row">
                         <span>Price</span>
-                        <span>{price.toFixed(2)}</span>
+                        {/* <span>{price.toFixed(2)}</span> */}
                         {/* {temp_data.map((item) =>
                             <span>{item?.price - 2}</span>
                         )} */}
@@ -83,11 +69,11 @@ const Cart = () => {
                     <div class="row total">
                         <span>Total Amount</span>
 
-                        <span>₹{price.toFixed(2)}</span>
+                        {/* <span>₹{price.toFixed(2)}</span> */}
 
                     </div>
 
-                    <button class="order-btn">PLACE ORDER</button>
+                    <button class="order-btn" onClick={()=>navigate('/payment')}>PLACE ORDER</button>
                 </div>
 
             </div>
@@ -96,4 +82,4 @@ const Cart = () => {
     )
 }
 
-export default Cart
+export default Wish 

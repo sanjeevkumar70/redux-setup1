@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import './navbar.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars, faXmark, faChevronDown, faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
 
 const Navbar = () => {
@@ -11,6 +12,7 @@ const Navbar = () => {
 
   const token = localStorage.getItem("token")
   const temp_data = useSelector((state) => state.cartReducer.cart_product);
+  const wishlist_data = useSelector((state) => state.wishcartReducer.wish_data);
 
 
   return (
@@ -44,6 +46,11 @@ const Navbar = () => {
             <NavLink to='/cart' className='nav-item cart-counter'>
               <FontAwesomeIcon icon={faCartShopping} size={'xl'} />
               <span>{temp_data.length}</span>
+            </NavLink>
+
+            <NavLink to='/wish' className='nav-item cart-counter'>
+             <FontAwesomeIcon icon={faHeart} size={'xl'} />
+              <span>{wishlist_data.length}</span>
             </NavLink>
 
             {token ?

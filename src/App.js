@@ -13,6 +13,8 @@ import { ApiCall } from './components/FetchApi/ApiCall';
 import ApiCall2 from './components/FetchApi/ApiCall2';
 import ApiCall3 from './components/FetchApi/ApiCall3';
 import Cart from './components/Cart';
+import Wish from  './components/Wish';
+import Payment from './pages/Payment';
 
 function App() {
 
@@ -26,13 +28,19 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        {/* <Route path='/login' element={<Login />} /> */}
+        <Route path='/login' element={<Login />} />
         {/* <Route path='/' element={<ApiCall3 />} /> */}
         <Route path='/cart' element={<Cart />} />
-
+        <Route path='/wish' element={<Wish/>} />
         <Route path='/about' element={
           <ProtectedaRoute>
             <About />
+          </ProtectedaRoute>
+        } />
+
+        <Route path='/payment' element={
+          <ProtectedaRoute>
+            <Payment />
           </ProtectedaRoute>
         } />
       </Routes>
