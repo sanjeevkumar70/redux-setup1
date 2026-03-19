@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Login = () => {
     // const [username, setUsername] = useState('')
@@ -27,7 +28,7 @@ const Login = () => {
 
             if (response.ok) {
                 localStorage.setItem('token', data.token)
-                alert("Login success");
+                swal("Login success");
                 navigate("/")
             } else {
                 console.log("Error:", data.message);

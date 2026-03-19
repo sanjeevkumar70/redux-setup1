@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import { ProtectedaRoute } from './components/ProtectedaRoute';
 import { ApiCall } from './components/FetchApi/ApiCall';
 import ApiCall2 from './components/FetchApi/ApiCall2';
@@ -16,12 +17,13 @@ import Cart from './components/Cart';
 import Wish from  './components/Wish';
 import Payment from './pages/Payment';
 
+
 function App() {
 
   const temp = useSelector(state => state.productReducer.productData)
   const token = localStorage.getItem('token')
 
-  console.log(temp)
+  // console.log(temp)
 
   return (
     <>
@@ -29,6 +31,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register/>}/>
         {/* <Route path='/' element={<ApiCall3 />} /> */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/wish' element={<Wish/>} />

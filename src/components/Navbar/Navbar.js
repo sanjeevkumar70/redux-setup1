@@ -60,6 +60,7 @@ const Navbar = () => {
               :
               <NavLink to='/login' className='nav-item'>Login</NavLink>
             }
+            <NavLink to='/register' className='nav-item'>Register</NavLink>
 
           </div>
         </div>
