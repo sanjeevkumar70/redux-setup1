@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { loginDataAction } from '../redux/action/cartData';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import swal from 'sweetalert';
 
 const Login = () => {
     // const [username, setUsername] = useState('')
     // const [password, setPassword] = useState('')
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const [formData, setFormData] = useState({
         email: "",
@@ -25,9 +28,12 @@ const Login = () => {
             });
 
             const data = await response.json();
+            
+            // console.log(data)
 
             if (response.ok) {
                 localStorage.setItem('token', data.token)
+                dispatch(loginDataAction(data))
                 swal("Login success");
                 navigate("/")
             } else {

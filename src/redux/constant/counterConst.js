@@ -11,3 +11,6 @@ export const QUAN_DATA="QUAN_DATA"
 
 
 export const WISH_DATA="WISH_DATA"
+
+// login data
+export const LOG_DATA="LOG_DATA"

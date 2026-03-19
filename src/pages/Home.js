@@ -12,6 +12,11 @@ const Home = () => {
     // const temp_data = useSelector((state) => state.cartReducer.cart_product);
     // console.log(temp_data, 'this is home page')
 
+    const {token, user_data} = useSelector((state)=>state.loginReducer)
+    // const token_value = useSelector((state)=>state.loginReducer.token)
+    // console.log(user_data,"======= USER DATA=============")
+    // console.log(token, "====TOKEN======")
+
     useEffect(() => {
 
         fetch('https://dummyjson.com/products')
@@ -19,6 +24,7 @@ const Home = () => {
             .then(mydata => setData(mydata.products))
 
     }, [])
+
 
 
     const handleCart = (p_data) => {

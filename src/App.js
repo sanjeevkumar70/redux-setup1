@@ -16,6 +16,7 @@ import ApiCall3 from './components/FetchApi/ApiCall3';
 import Cart from './components/Cart';
 import Wish from  './components/Wish';
 import Payment from './pages/Payment';
+import Product from './pages/Product';
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register/>}/>
+        <Route path='/product' element={<Product/>} />
+        
         {/* <Route path='/' element={<ApiCall3 />} /> */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/wish' element={<Wish/>} />

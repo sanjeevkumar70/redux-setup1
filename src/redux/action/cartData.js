@@ -1,4 +1,4 @@
-import { CART_DATA, REM_DATA, QUAN_DATA, WISH_DATA } from "../constant/counterConst"
+import { CART_DATA, REM_DATA, QUAN_DATA, WISH_DATA, LOG_DATA } from "../constant/counterConst"
 
 export const cartAction = (p_data) => {
     return {
@@ -26,5 +26,13 @@ export const wishUpdateAction = (s_data)=>{
     return{
         type:WISH_DATA,
         payload:s_data
+    }
+}
+
+
+export const loginDataAction = (log_data)=>{
+    return{
+        type:LOG_DATA,
+        payload:log_data
     }
 }
