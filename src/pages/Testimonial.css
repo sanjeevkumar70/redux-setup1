@@ -100,7 +100,7 @@
 
     .testimonial-section .testimonial-card {
         grid-template-columns: 1fr;
-        min-height: auto;
+        min-height: max-content;
     }
 
     /* 🔥 Full width image on mobile */
