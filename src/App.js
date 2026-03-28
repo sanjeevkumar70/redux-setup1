@@ -14,6 +14,7 @@ import Product from './pages/Product';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import ProductList from './pages/ProductList/ProductList';
 import Wishlist from './pages/Wishlist/Wishlist';
+import ProductListcopy from './pages/ProductList/ProductListcopy';
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
         } />
 
         <Route path='/product/:slug' element={<ProductDetails />} />
-        <Route path='/product/productlist' element={<ProductList />} />
+        <Route path='/product/productlist' element={<ProductListcopy />} />
       </Routes>
 
     </>

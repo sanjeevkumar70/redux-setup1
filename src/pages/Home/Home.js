@@ -1,109 +1,76 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { cartAction } from '../../redux/action/cartData'
-import { wishUpdateAction } from '../../redux/action/cartData'
+import { useDispatch } from 'react-redux'
+import { cartAction, wishUpdateAction } from '../../redux/action/cartData'
 import { Testimonial } from '../../components/Testimonial/Testimonial'
+import './home.scss'
 
 const Home = () => {
     const [data, setData] = useState([])
     const dispatch = useDispatch()
 
     useEffect(() => {
-
         fetch('https://dummyjson.com/products')
             .then(res => res.json())
             .then(mydata => setData(mydata.products))
     }, [])
 
-
-    const handleCart = (p_data) => {
-        dispatch(cartAction(p_data))
+    const handleCart = (item) => {
+        dispatch(cartAction(item))
     }
 
-    const handleWish = (s_data) => {
-        dispatch(wishUpdateAction(s_data))
+    const handleWish = (item) => {
+        dispatch(wishUpdateAction(item))
     }
-
 
     return (
-        <>
+        <div className="home">
 
             <Testimonial />
 
-            <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "20px",
-                padding: "20px"
-            }}>
+            <div className="product-grid">
+
                 {data.map((item) => (
-                    <div key={item.id} style={{
-                        border: "1px solid #ddd",
-                        borderRadius: "10px",
-                        padding: "15px",
-                        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                        textAlign: "center",
-                        backgroundColor: "#fff"
-                    }}>
-                        <img
-                            src={item.thumbnail}
-                            alt={item.title}
-                            style={{
-                                width: "100%",
-                                height: "200px",
-                                objectFit: "cover",
-                                borderRadius: "8px"
-                            }}
-                        />
+                    <div className="product-card" key={item.id}>
 
-                        <h3 style={{ margin: "10px 0" }}>
-                            {item.title}
-                        </h3>
+                        <div className="image-box">
+                            <img src={item.thumbnail} alt={item.title} />
+                        </div>
 
-                        <p style={{
-                            fontSize: "14px",
-                            color: "#555",
-                            height: "40px",
-                            overflow: "hidden"
-                        }}>
-                            {item.description}
-                        </p>
+                        <div className="product-info">
 
-                        <h4 style={{ color: "green", margin: "10px 0" }}>
-                            ₹ {item.price}
-                        </h4>
+                            <h3>{item.title}</h3>
 
-                        <button style={{
-                            padding: "8px 15px",
-                            border: "none",
-                            borderRadius: "5px",
-                            backgroundColor: "#000",
-                            color: "#fff",
-                            cursor: "pointer"
-                        }}
-                            onClick={() => handleCart(item)}
-                        >
-                            Add to Cart
-                        </button>
-                        &nbsp;
-                        <button style={{
-                            padding: "8px 15px",
-                            border: "none",
-                            borderRadius: "5px",
-                            backgroundColor: "#000",
-                            color: "#fff",
-                            cursor: "pointer"
-                        }}
-                            onClick={() => { handleWish(item) }}
-                        >
-                            wishlist
-                        </button>
+                            <p>{item.description}</p>
+
+                            <div className="price">
+                                ₹ {item.price}
+                            </div>
+
+                            <div className="actions">
+                                <button 
+                                    className="cart-btn"
+                                    onClick={() => handleCart(item)}
+                                >
+                                    Add to Cart
+                                </button>
+
+                                <button 
+                                    className="wish-btn"
+                                    onClick={() => handleWish(item)}
+                                >
+                                    Wishlist
+                                </button>
+                            </div>
+
+                        </div>
 
                     </div>
                 ))}
+
             </div>
-        </>
+
+        </div>
     )
 }
 
-export default Home
+export default Home;

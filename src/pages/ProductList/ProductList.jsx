@@ -1,22 +1,13 @@
-import React, { use, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import {
-  Table,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from 'reactstrap'
 import swal from 'sweetalert'
+import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 const ProuctList = () => {
   const [product, setProduct] = useState([])
   const [refresh, setRefresh] = useState(null)
-
   const [editModal, setEditModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
-
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [id, setId] = useState(null)
 
@@ -55,7 +46,6 @@ const ProuctList = () => {
         'https://enterprise-admin-backend.onrender.com/api/products',
         {
           headers: {
-            method: 'GET',
             Authorization: `Bearer ${token}`
           }
         }
@@ -119,8 +109,7 @@ const ProuctList = () => {
     setEditModal(false)
   }
 
-  const handleAddClick = product => {
-    setItem(product)
+  const handleAddClick = () => {
     setAddModal(true)
   }
 
@@ -168,7 +157,6 @@ const ProuctList = () => {
         method: 'DELETE', // ✅ correct place
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
         }
       }
     )
@@ -181,7 +169,7 @@ const ProuctList = () => {
     })
   }
 
-  const handleAddWishList = async id => {
+  const handleAddWishList = async (id) => {
     const wish = await fetch(
       `https://enterprise-admin-backend.onrender.com/api/wishlist/${id}`,
       {
@@ -199,7 +187,7 @@ const ProuctList = () => {
       <div>
         <Button
           className='btn btn-primary d-flex flex-end my-4 mx-5'
-          onClick={() => handleAddClick(product)}
+          onClick={() => handleAddClick()}
         >
           ADD PRODUCT
         </Button>

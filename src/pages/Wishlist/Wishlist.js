@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
 import './wishlist.scss'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
 
 const WishList = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-
     const { token } = useSelector(state => state.loginReducer);
 
     useEffect(() => {
@@ -52,8 +51,6 @@ const WishList = () => {
                 <div className="wishlist-grid">
 
                     {data.map((item) => {
-
-                        // ✅ FIX PRICE
                         const discountPercent = 10;
                         const discountAmount = (item.p_price * discountPercent) / 100;
                         const finalPrice = (item.p_price - discountAmount).toFixed(2);
@@ -101,4 +98,4 @@ const WishList = () => {
     )
 }
 
-export default WishList;
+export default WishList;    
