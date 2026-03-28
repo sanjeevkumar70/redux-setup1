@@ -14,11 +14,12 @@ const ProuctList = () => {
   const [product, setProduct] = useState([])
   const [refresh, setRefresh] = useState(null)
 
-  const [modal, setModal] = useState(false)
+  const [editModal, setEditModal] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [id, setId] = useState(null)
 
-  // const [wish, wishlist] = useState([])
 
   const [item, setItem] = useState({
     p_code: '',
@@ -41,13 +42,16 @@ const ProuctList = () => {
     quantity: 0,
     p_image: ''
   })
-  // console.log(formdata, '---------FORM DATA--------')
-  const toggle = () => setModal(!modal)
+  const addToggle = () => setAddModal(!addModal)
+  const editToggle = () => setEditModal(!editModal)
 
   const { token } = useSelector(state => state.loginReducer)
 
+  console.log(formdata, 'this is form data ')
+
+  //product list api call
   useEffect(() => {
-    async function fetched () {
+    async function fetched() {
       const res = await fetch(
         'https://enterprise-admin-backend.onrender.com/api/products',
         {
@@ -59,14 +63,14 @@ const ProuctList = () => {
       )
       const product_data = await res.json()
       setProduct(product_data.data)
-      // console.log(product_data.data, '=======DATA===========')
     }
     fetched()
   }, [refresh])
 
-  const handleDeleteClick = async param => {
+
+  const handleDeleteClick = async (id) => {
     const res = await fetch(
-      `https://enterprise-admin-backend.onrender.com/api/products/${param}`,
+      `https://enterprise-admin-backend.onrender.com/api/products/${id}`,
       {
         method: 'DELETE', // ✅ correct place
         headers: {
@@ -82,12 +86,11 @@ const ProuctList = () => {
       icon: 'success',
       draggable: true
     })
-    // console.log(product_data, '====deleted======')
   }
 
-  const handleEditClick = product => {
+  const handleEditClick = (product) => {
     setSelectedProduct(product)
-    setModal(true)
+    setEditModal(true)
     setFormData({
       p_code: product?.p_code,
       p_name: product?.p_name,
@@ -100,9 +103,11 @@ const ProuctList = () => {
     })
     setId(product._id)
   }
-  const handleChange = e => {
+
+  const handleChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value })
   }
+
   const handleSave = async () => {
     const response = await fetch(
       `https://enterprise-admin-backend.onrender.com/api/products/${id}`,
@@ -132,12 +137,12 @@ const ProuctList = () => {
       p_image: ''
     })
     setRefresh(Math.random() + new Date())
-    setModal(false)
-    // console.log(data, '=======Edit data========')
+    setEditModal(false)
   }
+
   const handleAddItem = product => {
     setItem(product)
-    setModal(true)
+    setAddModal(true)
   }
 
   const handleAdd = e => {
@@ -174,10 +179,9 @@ const ProuctList = () => {
       p_image: ''
     })
     setRefresh(Math.random() + new Date())
-    setModal(false)
+    setAddModal(false)
   }
 
-  // WISH LIST
   const handleWishList = async id => {
     const wish = await fetch(
       `https://enterprise-admin-backend.onrender.com/api/wishlist/${id}`,
@@ -185,12 +189,10 @@ const ProuctList = () => {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`
-          // 'Content-Type': 'application/json'
         }
       }
     )
     const s_data = await wish.json()
-    console.log(s_data, 'WISH LIST DATA')
     setRefresh(Math.random() + new Date())
   }
   return (
@@ -235,135 +237,135 @@ const ProuctList = () => {
         </Table>
 
         {/* EDIT BUTTON  */}
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Edit Product</ModalHeader>
+        <Modal isOpen={editModal} toggle={editToggle}>
+          <ModalHeader toggle={editToggle}>Edit Product</ModalHeader>
           <ModalBody>
             <input
               value={formdata.p_code}
               type='text'
               name='p_code'
               placeholder='code'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.p_name}
               type='text'
               name='p_name'
               placeholder='name'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.p_price}
               type='text'
               name='p_price'
               placeholder='price'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.p_description}
               type='text'
               name='p_description'
               placeholder='des'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.rating}
               type='text'
               name='rating'
               placeholder='rating'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.dimension}
               type='text'
               name='dimension'
               placeholder='dim'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.quantity}
               type='text'
               name='quantity'
               placeholder='quantity'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               value={formdata.p_image}
               type='text'
               name='p_image'
               placeholder='image'
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={handleSave}>
               Save
             </Button>
-            <Button color='secondary' onClick={toggle}>
+            <Button color='secondary' onClick={editToggle}>
               Cancel
             </Button>
           </ModalFooter>
         </Modal>
 
         {/* ADD PRUDUCT */}
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>ADD Product</ModalHeader>
+        <Modal isOpen={addModal} toggle={addToggle}>
+          <ModalHeader toggle={addToggle}>ADD Product</ModalHeader>
 
           <ModalBody>
             <input
               type='text'
               name='p_code'
               placeholder='code'
-              onChange={e => handleAdd()}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='p_name'
               placeholder='name'
-              onChange={e => handleAdd()}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='p_price'
               placeholder='price'
-              onChange={e => handleAdd(e)}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='p_description'
               placeholder='des'
-              onChange={e => handleAdd(e)}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='rating'
               placeholder='rating'
-              onChange={e => handleAdd(e)}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='dimension'
               placeholder='dim'
-              onChange={e => handleAdd(e)}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='quantity'
               placeholder='quantity'
-              onChange={e => handleAdd(e)}
+              onChange={handleAdd}
             />
 
             <input
               type='text'
               name='p_image'
               placeholder='image'
-              onChange={e => handleAdd(e)}
+              onChange={handleAdd}
             />
           </ModalBody>
 
@@ -371,7 +373,7 @@ const ProuctList = () => {
             <Button color='primary' onClick={handleSaveProduct}>
               Save
             </Button>
-            <Button color='secondary' onClick={toggle}>
+            <Button color='secondary' onClick={addToggle}>
               Cancel
             </Button>
           </ModalFooter>

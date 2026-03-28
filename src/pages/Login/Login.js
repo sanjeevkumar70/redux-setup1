@@ -31,11 +31,9 @@ const Login = () => {
                 swal("Login success");
                 navigate("/")
             } else {
-                console.log("Error:", data.message);
             }
 
         } catch (error) {
-            console.error("Something went wrong:", error);
         }
     }
 

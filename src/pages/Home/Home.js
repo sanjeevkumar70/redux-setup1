@@ -5,27 +5,15 @@ import { wishUpdateAction } from '../../redux/action/cartData'
 import { Testimonial } from '../../components/Testimonial/Testimonial'
 
 const Home = () => {
-
     const [data, setData] = useState([])
     const dispatch = useDispatch()
-
-
-    // const temp_data = useSelector((state) => state.cartReducer.cart_product);
-    // console.log(temp_data, 'this is home page')
-
-    const { token, user_data } = useSelector((state) => state.loginReducer)
-    // const token_value = useSelector((state)=>state.loginReducer.token)
-    // console.log(user_data,"======= USER DATA=============")
-    // console.log(token, "====TOKEN======")
 
     useEffect(() => {
 
         fetch('https://dummyjson.com/products')
             .then(res => res.json())
             .then(mydata => setData(mydata.products))
-
     }, [])
-
 
 
     const handleCart = (p_data) => {

@@ -28,12 +28,8 @@ const ApiCall2 = () => {
                     body: JSON.stringify(formData),
                 }
             );
-
             const data = await res.json();
-
-            console.log(data, "this is data");
         } catch (error) {
-            console.log("Error:", error);
         }
     };
 

@@ -7,10 +7,6 @@ const Counter = () => {
 
     const temp = useSelector(state => state.counter.count)
 
-
-    // console.log(temp)
-
-
     const increaseFn = () => {
         dispatch(counterActionIncr())
     }

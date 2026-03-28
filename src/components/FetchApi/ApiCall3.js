@@ -32,11 +32,7 @@ const ApiCall3 = () => {
             );
 
             const data = await res.json();
-
-            console.log(data, "this is data");
-
         } catch (error) {
-            console.log("Error:", error);
         }
     };
 

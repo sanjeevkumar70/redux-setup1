@@ -14,14 +14,11 @@ const Product = () => {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
-            // body: JSON.stringify(user_data)
         }).then((res) => res.json())
             .then((data) => {
-                // console.log(data, "PRODUCT DATA");
                 setProducts(data.data);
             })
             .catch((err) => {
-                console.log(err);
             });
 
     }, [token]);
@@ -29,11 +26,9 @@ const Product = () => {
     return (
         <div className="container">
             {/* <h1 className="title">Product List</h1> */}
-
             <div className="grid">
                 {products?.map((product) => (
                     <div key={product._id} className="card">
-
                         {/* Product Image */}
                         <div className="image-container">
                             <img

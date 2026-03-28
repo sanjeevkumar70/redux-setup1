@@ -18,9 +18,6 @@ export const ApiCall = () => {
     }, [])
 
 
-    console.log(data, "data")
-
-
     return (
         <>
 

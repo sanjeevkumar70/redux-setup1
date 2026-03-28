@@ -23,14 +23,9 @@ const WishList = () => {
                 );
 
                 const result = await response.json();
-
-                console.log(result, "======WISHLIST======");
-
-                // ✅ IMPORTANT: set data
                 setData(result?.data || result);
 
             } catch (error) {
-                console.error("Error fetching wishlist:", error);
             }
         }
 
