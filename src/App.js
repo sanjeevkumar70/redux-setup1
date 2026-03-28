@@ -55,7 +55,7 @@ function App() {
 
         <Route path='/product/:slug' element={<ProductDetails/>} />
         <Route path='/product-create' element={<ProductCreate/>}/>
-        <Route path='/productlist' element={<ProductList/>} />
+        <Route path='/product/productlist' element={<ProductList/>} />
       </Routes>
 
 
