@@ -47,7 +47,6 @@ const ProuctList = () => {
 
   const { token } = useSelector(state => state.loginReducer)
 
-  console.log(formdata, 'this is form data ')
 
   //product list api call
   useEffect(() => {
@@ -68,26 +67,6 @@ const ProuctList = () => {
   }, [refresh])
 
 
-  const handleDeleteClick = async (id) => {
-    const res = await fetch(
-      `https://enterprise-admin-backend.onrender.com/api/products/${id}`,
-      {
-        method: 'DELETE', // ✅ correct place
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-    const product_data = await res.json()
-    setRefresh(Math.random() + new Date())
-    swal({
-      title: product_data.message,
-      icon: 'success',
-      draggable: true
-    })
-  }
-
   const handleEditClick = (product) => {
     setSelectedProduct(product)
     setEditModal(true)
@@ -104,11 +83,11 @@ const ProuctList = () => {
     setId(product._id)
   }
 
-  const handleChange = (e) => {
+  const handleEditChange = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value })
   }
 
-  const handleSave = async () => {
+  const handleEditSave = async () => {
     const response = await fetch(
       `https://enterprise-admin-backend.onrender.com/api/products/${id}`,
       {
@@ -140,12 +119,12 @@ const ProuctList = () => {
     setEditModal(false)
   }
 
-  const handleAddItem = product => {
+  const handleAddClick = product => {
     setItem(product)
     setAddModal(true)
   }
 
-  const handleAdd = e => {
+  const handleAddChange = e => {
     setItem({ ...item, [e.target.name]: e.target.value })
   }
 
@@ -182,7 +161,27 @@ const ProuctList = () => {
     setAddModal(false)
   }
 
-  const handleWishList = async id => {
+  const handleDeleteClick = async (id) => {
+    const res = await fetch(
+      `https://enterprise-admin-backend.onrender.com/api/products/${id}`,
+      {
+        method: 'DELETE', // ✅ correct place
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    const product_data = await res.json()
+    setRefresh(Math.random() + new Date())
+    swal({
+      title: product_data.message,
+      icon: 'success',
+      draggable: true
+    })
+  }
+
+  const handleAddWishList = async id => {
     const wish = await fetch(
       `https://enterprise-admin-backend.onrender.com/api/wishlist/${id}`,
       {
@@ -200,7 +199,7 @@ const ProuctList = () => {
       <div>
         <Button
           className='btn btn-primary d-flex flex-end my-4 mx-5'
-          onClick={() => handleAddItem(product)}
+          onClick={() => handleAddClick(product)}
         >
           ADD PRODUCT
         </Button>
@@ -226,7 +225,7 @@ const ProuctList = () => {
                   &nbsp;
                   <Button onClick={() => handleEditClick(item)}>Edit</Button>
                   &nbsp;
-                  <Button onClick={() => handleWishList(item._id)}>
+                  <Button onClick={() => handleAddWishList(item._id)}>
                     {item.wishlist ? 'wishlist' : 'not wishlist'}
                   </Button>
                   &nbsp;
@@ -245,60 +244,60 @@ const ProuctList = () => {
               type='text'
               name='p_code'
               placeholder='code'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.p_name}
               type='text'
               name='p_name'
               placeholder='name'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.p_price}
               type='text'
               name='p_price'
               placeholder='price'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.p_description}
               type='text'
               name='p_description'
               placeholder='des'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.rating}
               type='text'
               name='rating'
               placeholder='rating'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.dimension}
               type='text'
               name='dimension'
               placeholder='dim'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.quantity}
               type='text'
               name='quantity'
               placeholder='quantity'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
             <input
               value={formdata.p_image}
               type='text'
               name='p_image'
               placeholder='image'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEditChange(e)}
             />
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={handleSave}>
+            <Button color='primary' onClick={handleEditSave}>
               Save
             </Button>
             <Button color='secondary' onClick={editToggle}>
@@ -316,56 +315,56 @@ const ProuctList = () => {
               type='text'
               name='p_code'
               placeholder='code'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='p_name'
               placeholder='name'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='p_price'
               placeholder='price'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='p_description'
               placeholder='des'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='rating'
               placeholder='rating'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='dimension'
               placeholder='dim'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='quantity'
               placeholder='quantity'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
 
             <input
               type='text'
               name='p_image'
               placeholder='image'
-              onChange={handleAdd}
+              onChange={handleAddChange}
             />
           </ModalBody>
 
