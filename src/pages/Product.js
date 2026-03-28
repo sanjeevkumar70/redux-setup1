@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Product = () => {
     const [products, setProducts] = useState([]);
     // const temp_data = '';
-    const { token } = useSelector((state) => state.loginReducer)   
+    const { token } = useSelector((state) => state.loginReducer)
     const navigate = useNavigate();
     useEffect(() => {
         const res = fetch("https://enterprise-admin-backend.onrender.com/api/products", {
@@ -59,7 +59,7 @@ const Product = () => {
 
                         <div className="card-footer">
                             <span className="price">₹{product.p_price}</span>
-                            <button className="btn" onClick={()=>navigate(`/product/${product._id}`, {state:product})}>View details</button>
+                            <button className="btn" onClick={() => navigate(`/product/${product._id}`, { state: product })}>View details</button>
                         </div>
 
                     </div>

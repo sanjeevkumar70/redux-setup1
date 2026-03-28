@@ -1,33 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import Counter from './components/Counter';
-import FetchData from './components/FetchData';
-import { useSelector } from 'react-redux';
 import Navbar from './components/Navbar/Navbar';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import { ProtectedaRoute } from './components/ProtectedaRoute';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Register from './pages/Signup/Register';
+import { ProtectedaRoute } from './components/ProtectedRoute/ProtectedaRoute';
 import { ApiCall } from './components/FetchApi/ApiCall';
 import ApiCall2 from './components/FetchApi/ApiCall2';
 import ApiCall3 from './components/FetchApi/ApiCall3';
-import Cart from './components/Cart';
-import Wish from './components/Wish';
-import Payment from './pages/Payment';
+import Cart from './pages/Cart/Cart';
+import Payment from './pages/Payment/Payment';
 import Product from './pages/Product';
-import ProductDetails from './pages/ProductDetails';
-import { ProductCreate } from './pages/ProductCreate';
-import ProductList from './pages/ProductList';
+import ProductDetails from './pages/ProductDetails/ProductDetails';
+import ProductList from './pages/ProductList/ProductList';
+import Wishlist from './pages/Wishlist/Wishlist';
 
 
 function App() {
-
-  const temp = useSelector(state => state.productReducer.productData)
-  const token = localStorage.getItem('token')
-
-  // console.log(temp)
 
   return (
     <>
@@ -38,12 +27,15 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/product' element={<Product />} />
 
-        {/* <Route path='/' element={<ApiCall3 />} /> */}
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/wish' element={<Wish />} />
-        <Route path='/about' element={
+        <Route path='/cart' element={
           <ProtectedaRoute>
-            <About />
+            <Cart />
+          </ProtectedaRoute>
+        } />
+
+        <Route path='/wishlist' element={
+          <ProtectedaRoute>
+            <Wishlist />
           </ProtectedaRoute>
         } />
 
@@ -53,17 +45,10 @@ function App() {
           </ProtectedaRoute>
         } />
 
-        <Route path='/product/:slug' element={<ProductDetails/>} />
-        <Route path='/product-create' element={<ProductCreate/>}/>
-        <Route path='/product/productlist' element={<ProductList/>} />
+        <Route path='/product/:slug' element={<ProductDetails />} />
+        <Route path='/product/productlist' element={<ProductList />} />
       </Routes>
 
-
-      {/* <Counter /> */}
-
-      {/* {temp?.products?.map((item) => <h1>{item.title}</h1>)}
-
-      <FetchData /> */}
     </>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartAction } from '../redux/action/cartData'
-import { wishUpdateAction } from '../redux/action/cartData'
-import { Testimonial } from './Testimonial'
+import { cartAction } from '../../redux/action/cartData'
+import { wishUpdateAction } from '../../redux/action/cartData'
+import { Testimonial } from '../../components/Testimonial/Testimonial'
 
 const Home = () => {
 

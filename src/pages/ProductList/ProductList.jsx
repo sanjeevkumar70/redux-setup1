@@ -212,7 +212,7 @@ const ProuctList = () => {
             </tr>
           </thead>
           <tbody>
-            {product.map((item, index) => (
+            {product?.map((item, index) => (
               <tr key={item._id}>
                 <th scope='row'>{index + 1}</th>
                 <td>{item.p_code}</td>

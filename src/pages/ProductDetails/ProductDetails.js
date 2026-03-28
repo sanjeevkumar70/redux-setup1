@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProductDetails.css";
-import { useLocation,useDispatch } from "react-router-dom";
-import { cartAction } from "../redux/action/cartData";
+import { useLocation, useDispatch } from "react-router-dom";
+import { cartAction } from "../../redux/action/cartData";
 
 
 const ProductDetails = () => {
