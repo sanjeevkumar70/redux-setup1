@@ -18,6 +18,8 @@ const ProuctList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [id, setId] = useState(null)
 
+  // const [wish, wishlist] = useState([])
+
   const [item, setItem] = useState({
     p_code: '',
     p_name: '',
@@ -45,7 +47,7 @@ const ProuctList = () => {
   const { token } = useSelector(state => state.loginReducer)
 
   useEffect(() => {
-    async function fetched() {
+    async function fetched () {
       const res = await fetch(
         'https://enterprise-admin-backend.onrender.com/api/products',
         {
@@ -141,6 +143,7 @@ const ProuctList = () => {
   const handleAdd = e => {
     setItem({ ...item, [e.target.name]: e.target.value })
   }
+
   const handleSaveProduct = async () => {
     const e = await fetch(
       `https://enterprise-admin-backend.onrender.com/api/products`,
@@ -173,6 +176,23 @@ const ProuctList = () => {
     setRefresh(Math.random() + new Date())
     setModal(false)
   }
+
+  // WISH LIST
+  const handleWishList = async id => {
+    const wish = await fetch(
+      `https://enterprise-admin-backend.onrender.com/api/wishlist/${id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`
+          // 'Content-Type': 'application/json'
+        }
+      }
+    )
+    const s_data = await wish.json()
+    console.log(s_data, 'WISH LIST DATA')
+    setRefresh(Math.random() + new Date())
+  }
   return (
     <>
       <div>
@@ -201,7 +221,13 @@ const ProuctList = () => {
                   <Button onClick={() => handleDeleteClick(item._id)}>
                     Delete
                   </Button>
+                  &nbsp;
                   <Button onClick={() => handleEditClick(item)}>Edit</Button>
+                  &nbsp;
+                  <Button onClick={() => handleWishList(item._id)}>
+                    {item.wishlist ? 'wishlist' : 'not wishlist'}
+                  </Button>
+                  &nbsp;
                 </td>
               </tr>
             ))}
