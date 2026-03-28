@@ -26,8 +26,8 @@ const Wish = () => {
                     }
                 }
             )
-            const p_data = response.json();
-            console.log(p_data, "======WISH LIST data======")
+            const p_data = await response.json();
+            console.log(p_data.data, "======WISH LIST data======")
             // setData(p_data)
         }
         handleWishlist();
