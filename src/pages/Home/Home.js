@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cartAction, wishUpdateAction } from '../../redux/action/cartData'
 import { Testimonial } from '../../components/Testimonial/Testimonial'
 import './home.scss'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
     const [data, setData] = useState([])
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const { token } = useSelector((state) => state.loginReducer)
 
@@ -28,9 +30,9 @@ const Home = () => {
             setData(my_data.data)
 
         }
-       if(token){
-         HomePageProduct();
-       }
+        if (token) {
+            HomePageProduct();
+        }
     }, [token])
 
 
@@ -51,7 +53,7 @@ const Home = () => {
             <div className="product-grid">
 
                 {data.map((item) => (
-                    <div className="product-card" key={item._id}>
+                    <div className="product-card" key={item._id} onClick={() => navigate(`/item/${item._id}`, { state: item })}>
 
                         <div className="image-box">
                             <img src={item.p_image} alt={item.title} />
@@ -68,14 +70,14 @@ const Home = () => {
                             </div>
 
                             <div className="actions">
-                                <button 
+                                <button
                                     className="cart-btn"
                                     onClick={() => handleCart(item)}
                                 >
                                     Add to Cart
                                 </button>
 
-                                <button 
+                                <button
                                     className="wish-btn"
                                     onClick={() => handleWish(item)}
                                 >

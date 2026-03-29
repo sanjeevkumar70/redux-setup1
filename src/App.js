@@ -15,6 +15,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails';
 import ProductList from './pages/ProductList/ProductList';
 import Wishlist from './pages/Wishlist/Wishlist';
 import ProductListcopy from './pages/ProductList/ProductListcopy';
+import HomeProductDetails from './pages/HomeProductDetails/HomeProductDetails';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
 
         <Route path='/product/:slug' element={<ProductDetails />} />
         <Route path='/product/productlist' element={<ProductListcopy />} />
+        <Route path='/item/:slug' element={<HomeProductDetails/>}/>
       </Routes>
 
     </>
