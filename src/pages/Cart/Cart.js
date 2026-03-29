@@ -17,13 +17,13 @@ const Cart = () => {
 
     // ✅ TOTAL PRICE
     const totalPrice = temp_data.reduce((acc, item) => {
-        return acc + item.price * item.quantity;
+        return acc + item.p_price * item.quantity;
     }, 0);
 
     // ✅ TOTAL DISCOUNT (percentage based)
     const totalDiscount = temp_data.reduce((acc, item) => {
         const discountPercent = item.discountPercentage || 10;
-        const discountAmount = (item.price * discountPercent) / 100;
+        const discountAmount = (item.p_price * discountPercent) / 100;
         return acc + discountAmount * item.quantity;
     }, 0);
 
@@ -48,27 +48,27 @@ const Cart = () => {
                     temp_data.map((item) => {
 
                         const discountPercent = item.discountPercentage || 10;
-                        const discountAmount = (item.price * discountPercent) / 100;
-                        const discountedPrice = (item.price - discountAmount).toFixed(2);
+                        const discountAmount = (item.p_price * discountPercent) / 100;
+                        const discountedPrice = (item.p_price - discountAmount).toFixed(2);
 
                         return (
                             <div className="cart-card" key={item.id}>
-                                <img src={item.thumbnail} alt={item.title} />
+                                <img src={item.p_image} alt={item.title} />
 
                                 <div className="product-info">
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description?.slice(0, 60)}...</p>
+                                    <h3>{item.p_name}</h3>
+                                    <p>{item.p_description}...</p>
                                     <p className="seller">Seller: RetailNet</p>
 
                                     <div className="price">
                                         <span className="new-price">₹{discountedPrice}</span>
-                                        <span className="old-price">₹{item.price}</span>
+                                        <span className="old-price">₹{item.p_price}</span>
                                         <span className="discount">{discountPercent}% off</span>
                                     </div>
 
                                     <div className="actions">
 
-                                        <button onClick={() => handleRemove(item.id)}>
+                                        <button onClick={() => handleRemove(item._id)}>
                                             Remove
                                         </button>
 
