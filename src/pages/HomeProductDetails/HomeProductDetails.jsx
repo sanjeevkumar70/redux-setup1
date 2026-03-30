@@ -2,67 +2,101 @@ import React from 'react'
 import './HomeProductDetails.css'
 import { useLocation } from 'react-router-dom'
 import { Button, Container } from 'reactstrap'
+import { useDispatch } from 'react-redux'
+import { cartAction } from '../../redux/action/cartData'
 
 const HomeProductDetails = () => {
-  const product = useLocation().state
-  console.log(product)
+    const dispatch = useDispatch()
+    const product = useLocation().state
+    // console.log(product)
+
   if (!product) {
     return <div> ITEM GETTING LOAD......</div>
   }
 
-  return (
-    <div>
-      <Container className='text-center'>
-        <h1>PRODUCT DETAILS</h1>
-        <div
-          className='product-card'
-          style={{
-            width: '350px',
-            border: '1px solid #ddd',
-            borderRadius: '10px',
-            padding: '15px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-            backgroundColor: '#fff'
-          }}
-        >
-          {/* Image */}
-          <img
-            src={product.p_image}
-            alt={product.p_code}
-            style={{
-              width: '100%',
-              height: '180px',
-              objectFit: 'contain',
-              borderRadius: '8px'
-            }}
-          />
-          {/* Product Code / Title */}
-          <h3 style={{ margin: '10px 0', fontSize: '18px' }}>{product.p_code}</h3>
+    //PRICE DETAILS JS
+    const discountPercent = product.discountPercentage || 10
+    const discountAmount = (product.p_price * discountPercent) / 100
+    const discountedPrice = (product.p_price - discountAmount).toFixed(2)
 
-          {/* Description */}
-          <p
-            style={{
-              fontSize: '14px',
-              color: '#555',
-              height: '40px',
-              overflow: 'hidden'
-            }}
-          >
-            {product.p_description}
+    // ADD TO CART
+    const handleAddCart =(product)=>{
+        dispatch(cartAction(product))
+    }  
+  return (
+    <div
+      style={{
+        display: 'flex',
+        gap: '40px',
+        padding: '40px',
+        alignItems: 'flex-start'
+      }}
+    >
+      {/* LEFT SIDE - IMAGE */}
+      <div style={{ flex: 1 }}>
+        <img
+          src={product.p_image}
+          alt={product.p_code}
+          style={{
+            width: '100%',
+            height: '400px',
+            objectFit: 'contain',
+            borderRadius: '10px'
+          }}
+        />
+      </div>
+
+      {/* RIGHT SIDE - DETAILS */}
+      <div style={{ flex: 1 }}>
+        <h2 style={{ marginBottom: '10px' }}>{product.p_code}</h2>
+         <h2 style={{ marginBottom: '10px' }}>{product.p_name}</h2>
+
+        <p style={{ color: '#555', marginBottom: '15px' }}>
+          {product.p_description}
+        </p>
+
+        <h3 style={{ color: 'orange' }}>⭐ {product.rating}</h3>
+
+        {/* ✅ Price Section */}
+        <div style={{ margin: '15px 0' }}>
+          <h2 style={{ color: 'green' }}>₹ {discountedPrice}</h2>
+
+          <p style={{ textDecoration: 'line-through', color: '#999' }}>
+            ₹ {product.p_price}
           </p>
 
-          {/* Rating */}
-          <h4 style={{ margin: '8px 0', color: 'orange' }}>⭐ {product.rating}</h4>
-
-          {/* Price */}
-
-          <h4 style={{ margin: '8px 0', color: 'green' }}>₹ {product.p_price}</h4>
-          <Button>ADD TO CART</Button>
-          &nbsp;
-          <Button>BUY</Button>
-
+          <p style={{ color: 'red' }}>{discountPercent}% OFF</p>
         </div>
-      </Container>
+
+        <div style={{ display: 'flex', gap: '15px' }}>
+          <button
+            style={{
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              backgroundColor: '#000',
+              color: '#fff',
+              cursor: 'pointer'
+            }}
+            onClick={()=>handleAddCart(product)}
+          >
+            Add to Cart
+          </button>
+
+          <button
+            style={{
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              backgroundColor: '#555',
+              color: '#fff',
+              cursor: 'pointer'
+            }}
+          >
+            BUY
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
