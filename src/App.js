@@ -15,6 +15,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails';
 import ProductList from './pages/ProductList/ProductList';
 import Wishlist from './pages/Wishlist/Wishlist';
 import ProductListcopy from './pages/ProductList/ProductListcopy';
+import Form1 from './components/formhandling/Form1';
 
 
 function App() {
@@ -47,7 +48,12 @@ function App() {
         } />
 
         <Route path='/product/:slug' element={<ProductDetails />} />
-        <Route path='/product/productlist' element={<ProductListcopy />} />
+        <Route path='/product/productlist' element={
+          <ProtectedaRoute>
+            <ProductListcopy />
+          </ProtectedaRoute>
+        } />
+
       </Routes>
 
     </>

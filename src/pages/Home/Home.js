@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { cartAction, wishUpdateAction } from '../../redux/action/cartData'
 import { Testimonial } from '../../components/Testimonial/Testimonial'
 import './home.scss'
+import DigitalWatch from '../practice/DigitalWatch'
 
 const Home = () => {
     const [data, setData] = useState([])
@@ -24,6 +25,8 @@ const Home = () => {
 
     return (
         <div className="home">
+
+            <DigitalWatch/>
 
             <Testimonial />
 
