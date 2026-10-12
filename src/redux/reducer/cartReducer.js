@@ -9,7 +9,7 @@ export const cartReducer = (state = initialValue, action) => {
     switch (action.type) {
         case CART_DATA:
 
-            const exist = state.cart_product.find((item) => item.id === action.payload.id)
+            const exist = state.cart_product.find((item) => item._id === action.payload._id)
             if (exist) {
                 alert("Item is already in cart")
                 return state;
@@ -20,7 +20,7 @@ export const cartReducer = (state = initialValue, action) => {
                 cart_product: [...state.cart_product, { ...action.payload, quantity: 1 }]
             }
         case REM_DATA:
-            const remove = state.cart_product.filter((item) => item.id != action.payload)
+            const remove = state.cart_product.filter((item) => item._id != action.payload)
             alert("Item Removed from cart")
             return {
                 ...state,
